@@ -1,130 +1,149 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativelayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="edu.apsu.csci.projectpaint.PaintActivity"
-    android:id="@+id/relativelayout">
+    tools:context="edu.apsu.csci.projectpaint.PaintActivity">
 
     <View
+        android:id="@+id/view"
         android:layout_width="50dp"
         android:layout_height="fill_parent"
-        android:background="#A9A9A9"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/view" />
+        android:background="#A9A9A9" />
 
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:id="@+id/selector_toggleButton"
-        android:checked="true"
-        android:button="@android:color/transparent"
-        android:background="@drawable/selector"
-        android:layout_alignParentTop="true"
-        android:layout_alignEnd="@+id/undo_button"
-        android:layout_marginEnd="16dp" />
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="50dp"
+        android:layout_height="200dp">
 
-    <ToggleButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="line"
-        android:id="@+id/line_toggleButton"
-        android:layout_below="@+id/selector_toggleButton"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/view"
-        android:checked="false" />
 
-    <ToggleButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Square"
-        android:id="@+id/square_toggleButton"
-        android:layout_below="@+id/line_toggleButton"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/view"
-        android:checked="false" />
+        <RadioButton
+            android:id="@+id/selector_toggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/view"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:checked="true"
+            android:text="Selector" />
 
-    <ToggleButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Circle"
-        android:id="@+id/circle_toggleButton"
-        android:layout_below="@+id/square_toggleButton"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/view"
-        android:checked="false" />
+        <RadioButton
+            android:id="@+id/line_toggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/view"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/selector_toggleButton"
+            android:checked="false"
+            android:text="line" />
+
+        <RadioButton
+            android:id="@+id/square_toggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/view"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/line_toggleButton"
+            android:checked="false"
+            android:text="Square" />
+
+        <RadioButton
+            android:id="@+id/circle_toggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/view"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/square_toggleButton"
+            android:checked="false"
+            android:text="Circle" />
+    </RadioGroup>
 
     <View
+        android:id="@+id/view2"
         android:layout_width="50dp"
         android:layout_height="5dp"
-        android:background="#D3D3D3"
 
-        android:layout_below="@+id/circle_toggleButton"
         android:layout_alignEnd="@+id/view"
-        android:id="@+id/view2" />
+        android:layout_below="@+id/radioGroup"
+        android:background="#D3D3D3" />
 
     <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Undo"
         android:id="@+id/undo_button"
-        android:textSize="8dp"
-        android:layout_below="@+id/view2"
-        android:layout_alignParentStart="true" />
-
-    <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SAVE"
-        android:id="@+id/save_button"
-        android:layout_below="@+id/undo_button"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/view"
+        android:layout_below="@+id/view2"
+        android:text="Undo"
         android:textSize="8dp" />
+
+    <Button
+        android:id="@+id/save_button"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/view"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/undo_button"
+        android:text="SAVE"
+        android:textSize="8dp" />
+
     <View
+        android:id="@+id/view3"
         android:layout_width="50dp"
         android:layout_height="5dp"
-        android:background="#D3D3D3"
 
 
-        android:id="@+id/view3"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/save_button"
-        android:layout_alignParentStart="true" />
+        android:background="#D3D3D3" />
 
     <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Color"
         android:id="@+id/color_button"
-        android:layout_below="@+id/view3"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/view"
-        android:textSize="8dp" />
-
-    <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Thickness"
-        android:id="@+id/thick_button"
-        android:layout_below="@+id/color_button"
-        android:layout_alignParentStart="true"
         android:layout_alignEnd="@+id/view"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/view3"
+        android:text="Color"
         android:textSize="8dp" />
 
-    <ImageButton
+    <Button
+        android:id="@+id/thick_button"
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/view"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/color_button"
+        android:text="Thickness"
+        android:textSize="8dp" />
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="50dp"
+        android:layout_height="5dp"
+
+
+        android:background="#D3D3D3"
+        android:layout_below="@+id/thick_button"
+        android:layout_toStartOf="@+id/imageButton" />
+
+    <edu.apsu.csci.projectpaint.PaintView
         android:id="@+id/imageButton"
-        android:layout_alignTop="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/view"
         android:layout_toEndOf="@+id/view" />
+
 
 </RelativeLayout>
