@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class MainActivity extends ListActivity {
 
     private ArrayAdapter<String> adapter;
-    //comment
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
