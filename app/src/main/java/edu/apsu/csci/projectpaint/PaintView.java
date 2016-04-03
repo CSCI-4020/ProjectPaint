@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -20,13 +19,16 @@ public class PaintView extends View implements View.OnTouchListener{
     private Paint backgroundPaint;
     private Paint linePaint;
 
-    private float downX,upX,downY,upY;
+    private float downX,upX,downY,upY;//Stores the coordinates for user input
 
-    private ArrayList<Float> line = new ArrayList<>();
+    private ArrayList<Float> lines = new ArrayList<>();//Stores the coordines of the lines
 
+
+// Constructors
     public PaintView(Context context){
         super(context);
         setup(null);
+
     }
 
    public PaintView(Context context,AttributeSet attr){
@@ -40,7 +42,7 @@ public class PaintView extends View implements View.OnTouchListener{
         setup(attr);
 
     }
-
+//setup the paint view
     private void setup(AttributeSet attr){
         backgroundPaint = new Paint();
         backgroundPaint.setColor(Color.WHITE);
@@ -50,25 +52,29 @@ public class PaintView extends View implements View.OnTouchListener{
         linePaint.setColor(Color.BLACK);
         linePaint.setStyle(Paint.Style.STROKE);
         linePaint.setStrokeWidth(10);
+
         this.setOnTouchListener(this);
 
     }
-
+//draws on the paint view
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
         canvas.drawPaint(backgroundPaint);
 
-        //canvas.drawLine(0,0,getWidth()-1,getHeight()-1,linePaint);
-        for (float l=0; l<=line.size(); l+=4){
+       // canvas.drawLine(0, 0, getWidth() - 1, getHeight() - 1, linePaint);//draws a line accross the screen for testing purposes
+      for (int l=0; l< lines.size(); l+=4) {//supposed to output the coordinates of the lines arraylist
 
-            canvas.drawLine(l, l+1, l+2, l+3, linePaint);
+          canvas.drawLine(lines.get(l), lines.get(l + 1), lines.get(l + 2), lines.get(l + 3), linePaint);
+          Log.i("arrayDraw", "downx" + lines.get(l) + ", downy" + lines.get(l + 1) + ", upx" + lines.get(l + 2) + ", upy" + lines.get(+3));
 
-        }
+      }
+
+
     }
 
-    @Override
+    @Override //Does magical stuff as described by Dr. Nicholson and stack over flow
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int desiredWidth = 100;
         int desiredHeight = 100;
@@ -109,7 +115,7 @@ public class PaintView extends View implements View.OnTouchListener{
         setMeasuredDimension(width, height);
     }
 
-    @Override
+    @Override//on touch method cathe's user input
     public boolean onTouch(View v, MotionEvent event) {
 
         Log.i("onTouch","In onTouch");
@@ -132,21 +138,25 @@ public class PaintView extends View implements View.OnTouchListener{
                 break;
             case MotionEvent.ACTION_CANCEL:
                 break;
-            default:
-                break;
+
         }
         Log.i("onTouch","End of onTouch");
         return true;
 
     }
-
+//up dates the lanes array currently
     private void arrayUPDate(float downx, float downy,float upx,float upy){
 
 
-        line.add(downx);
-        line.add(downy);
-        line.add(upx);
-        line.add(upy);
+        lines.add(downx);
+        lines.add(downy);
+        lines.add(upx);
+        lines.add(upy);
+
+
+
+
+        Log.i("arrayUPDate()", "downx" + downx + ", downy" + downy + ", upx" + upx + ", upy" + upy);
         invalidate();
     }
 
