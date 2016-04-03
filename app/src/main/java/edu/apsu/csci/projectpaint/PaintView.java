@@ -17,11 +17,11 @@ import java.util.ArrayList;
 public class PaintView extends View implements View.OnTouchListener{
 
     private Paint backgroundPaint;
-    private Paint linePaint;
+    private static Paint linePaint;
 
     private float downX,upX,downY,upY;//Stores the coordinates for user input
 
-    private ArrayList<Float> lines = new ArrayList<>();//Stores the coordines of the lines
+    private ArrayList<Float> lines = new ArrayList<>();//Stores the coordinates of the lines
 
 
 // Constructors
@@ -56,6 +56,13 @@ public class PaintView extends View implements View.OnTouchListener{
         this.setOnTouchListener(this);
 
     }
+
+    public static void setColor(String color){
+
+        linePaint.setColor(Color.parseColor(color));
+
+    }
+
 //draws on the paint view
     @Override
     protected void onDraw(Canvas canvas) {

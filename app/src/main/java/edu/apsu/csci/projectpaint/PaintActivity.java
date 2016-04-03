@@ -1,9 +1,14 @@
 package edu.apsu.csci.projectpaint;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class PaintActivity extends Activity {
 
@@ -11,6 +16,47 @@ public class PaintActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paint);
+
+//Buttons that lets the user select the color of the new line
+        findViewById(R.id.color_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(PaintActivity.this);
+                builder.setTitle("Colors");
+                builder.setPositiveButton("Black", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        PaintView.setColor("Black");
+
+
+
+
+                    }
+                });
+
+                builder.setNegativeButton("Blue", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        PaintView.setColor("Blue");
+
+
+                    }
+                });
+                builder.setNeutralButton("Red", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        PaintView.setColor("Red");
+
+
+                    }
+                });
+
+
+
+                builder.show();
+
+            }
+        });
     }
 
     @Override
