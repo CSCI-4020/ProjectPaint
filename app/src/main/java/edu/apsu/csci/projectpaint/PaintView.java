@@ -14,37 +14,37 @@ import java.util.ArrayList;
 /**
  * Created by Frank on 4/1/2016.
  */
-public class PaintView extends View implements View.OnTouchListener{
+public class PaintView extends View implements View.OnTouchListener {
 
     private Paint backgroundPaint;
 
-
-
+    LinePaint linepaint;
 
 
     private ArrayList<LinePaint> linePaint = new ArrayList<>(); //May come in handy with LinePaint class
 
 
-// Constructors
-    public PaintView(Context context){
+    // Constructors
+    public PaintView(Context context) {
         super(context);
         setup(null);
 
     }
 
-   public PaintView(Context context,AttributeSet attr){
-       super(context,attr);
-       setup(attr);
+    public PaintView(Context context, AttributeSet attr) {
+        super(context, attr);
+        setup(attr);
 
-   }
+    }
 
-    public PaintView(Context context,AttributeSet attr,int defStyleAttr){
+    public PaintView(Context context, AttributeSet attr, int defStyleAttr) {
         super(context, attr, defStyleAttr);
         setup(attr);
 
     }
-//setup the paint view
-    private void setup(AttributeSet attr){
+
+    //setup the paint view
+    private void setup(AttributeSet attr) {
         backgroundPaint = new Paint();
         backgroundPaint.setColor(Color.WHITE);
         backgroundPaint.setStyle(Paint.Style.FILL);
@@ -56,21 +56,18 @@ public class PaintView extends View implements View.OnTouchListener{
     }
 
 
-
-
-//draws on the paint view
+    //draws on the paint view
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
         canvas.drawPaint(backgroundPaint);
 
-      // canvas.drawLine(0, 0, getWidth() - 1, getHeight() - 1, linePaint);//draws a line accross the screen for testing purposes
+        // canvas.drawLine(0, 0, getWidth() - 1, getHeight() - 1, linePaint);//draws a line accross the screen for testing purposes
 
-        for(LinePaint l: linePaint){
+        for (LinePaint l : linePaint) {
 
             canvas.drawLine(l.getX1(), l.getY1(), l.getX2(), l.getY2(), l.paint);
-
 
         }
 
@@ -118,25 +115,25 @@ public class PaintView extends View implements View.OnTouchListener{
         setMeasuredDimension(width, height);
     }
 
-    private float downX,upX,downY,upY;//Stores the coordinates for user input
+    private float downX, upX, downY, upY;//Stores the coordinates for user input
 
-    @Override//on touch method cathe's user input
+    @Override//on touch method catche's user input
     public boolean onTouch(View v, MotionEvent event) {
 
-        Log.i("onTouch","In onTouch");
+        Log.i("onTouch", "In onTouch");
         int action = event.getAction();
         switch (action) {
             case MotionEvent.ACTION_DOWN:
                 downX = event.getX();
                 downY = event.getY();
-                Log.i("onTouch","downX"+downX+", downY"+downY);
+                Log.i("onTouch", "downX" + downX + ", downY" + downY);
                 break;
             case MotionEvent.ACTION_MOVE:
                 break;
             case MotionEvent.ACTION_UP:
                 upX = event.getX();
                 upY = event.getY();
-                Log.i("onTouch","upX"+upX+", upY"+upY);
+                Log.i("onTouch", "upX" + upX + ", upY" + upY);
                 arrayUPDate(downX, downY, upX, upY);
 
 
@@ -150,16 +147,21 @@ public class PaintView extends View implements View.OnTouchListener{
 
     }
 
+    static String color = "BLACK";
+    static int thickness = 10;
+    public static void setCurrentColor(String c) {
+      color=c;
+    }
+
+    public static void setCurrentThickness(int t) {
+        thickness = t;
+    }
 
 
-
-//up dates the lines array currently
-    private void arrayUPDate(float downx, float downy,float upx,float upy){
-        LinePaint linepaint = new LinePaint(downx,downy,upx,upy);//May come in handy with LinePaint class
+    //up dates the lines array currently
+    private void arrayUPDate(float downx, float downy, float upx, float upy) {
+        linepaint = new LinePaint(downx, downy, upx, upy,color,thickness);//May come in handy with LinePaint class
         linePaint.add(linepaint); //May come in handy with LinePaint class
-
-
-
 
 
 

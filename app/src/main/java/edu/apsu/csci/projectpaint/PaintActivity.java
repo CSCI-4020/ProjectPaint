@@ -12,13 +12,12 @@ import android.view.MenuItem;
 import android.view.View;
 
 public class PaintActivity extends Activity {
-    LinePaint linepaint = new LinePaint();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paint);
-        linepaint.setColor("Black");
-        linepaint.setThickness(10);
+
 
 //Buttons that lets the user select the color of the new line
         findViewById(R.id.color_button).setOnClickListener(new View.OnClickListener() {
@@ -30,11 +29,7 @@ public class PaintActivity extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        linepaint.setColor("Black");
-
-
-
-
+                        PaintView.setCurrentColor("Black");
 
                     }
                 });
@@ -42,18 +37,13 @@ public class PaintActivity extends Activity {
                 builder.setNegativeButton("Blue", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        linepaint.setColor("Blue");
-
-
+                        PaintView.setCurrentColor("Blue");
                     }
                 });
                 builder.setNeutralButton("Red", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        linepaint.setColor("Red");
-
-
-
+                        PaintView.setCurrentColor("Red");
                     }
                 });
 
@@ -72,7 +62,7 @@ public class PaintActivity extends Activity {
                 builder.setPositiveButton("10pt", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        linepaint.setThickness(10);
+                        PaintView.setCurrentThickness(10);
 
 
                     }
@@ -81,7 +71,7 @@ public class PaintActivity extends Activity {
                 builder.setNegativeButton("20pt", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        linepaint.setThickness(20);
+                        PaintView.setCurrentThickness(20);
 
 
                     }
@@ -89,7 +79,7 @@ public class PaintActivity extends Activity {
                 builder.setNeutralButton("30pt", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        linepaint.setThickness(30);
+                        PaintView.setCurrentThickness(30);
 
 
                     }
