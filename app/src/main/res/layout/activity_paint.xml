@@ -25,8 +25,8 @@
 
         <RadioButton
             android:id="@+id/selector_toggleButton"
-            android:layout_width="20"
-            android:layout_height="20"
+            android:layout_width="20px"
+            android:layout_height="20px"
             android:layout_gravity="center_horizontal"
             android:layout_alignEnd="@+id/view"
             android:layout_alignParentStart="true"
@@ -38,8 +38,8 @@
 
         <RadioButton
             android:id="@+id/line_toggleButton"
-            android:layout_width="20"
-            android:layout_height="20"
+            android:layout_width="20px"
+            android:layout_height="20px"
             android:layout_alignEnd="@+id/view"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/selector_toggleButton"
@@ -51,8 +51,8 @@
 
         <RadioButton
             android:id="@+id/square_toggleButton"
-            android:layout_width="20"
-            android:layout_height="20"
+            android:layout_width="20px"
+            android:layout_height="20px"
             android:layout_alignEnd="@+id/view"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/line_toggleButton"
@@ -64,8 +64,8 @@
 
         <RadioButton
             android:id="@+id/circle_toggleButton"
-            android:layout_width="20"
-            android:layout_height="20"
+            android:layout_width="20px"
+            android:layout_height="20px"
             android:layout_alignEnd="@+id/view"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/square_toggleButton"
