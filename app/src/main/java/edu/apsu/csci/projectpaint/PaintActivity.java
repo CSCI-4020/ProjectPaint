@@ -3,9 +3,6 @@ package edu.apsu.csci.projectpaint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +14,9 @@ public class PaintActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paint);
+
+
+
 
 
 //Buttons that lets the user select the color of the new line
@@ -46,7 +46,6 @@ public class PaintActivity extends Activity {
                         PaintView.setCurrentColor("Red");
                     }
                 });
-
 
 
                 builder.show();

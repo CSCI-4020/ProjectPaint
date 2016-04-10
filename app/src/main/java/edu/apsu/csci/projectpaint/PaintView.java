@@ -66,8 +66,16 @@ public class PaintView extends View implements View.OnTouchListener {
         // canvas.drawLine(0, 0, getWidth() - 1, getHeight() - 1, linePaint);//draws a line accross the screen for testing purposes
 
         for (LinePaint l : linePaint) {
+            if(l.getId()==1){
+                canvas.drawLine(l.getX1(), l.getY1(), l.getX2(), l.getY2(), l.paint);
+            }else if(l.getId()==2){
 
-            canvas.drawLine(l.getX1(), l.getY1(), l.getX2(), l.getY2(), l.paint);
+            }else if(l.getId()==3){
+
+            }
+
+
+
 
         }
 
@@ -117,7 +125,7 @@ public class PaintView extends View implements View.OnTouchListener {
 
     private float downX, upX, downY, upY;//Stores the coordinates for user input
 
-    @Override//on touch method catche's user input
+    @Override//on touch method catches's user input
     public boolean onTouch(View v, MotionEvent event) {
 
         Log.i("onTouch", "In onTouch");
@@ -157,10 +165,15 @@ public class PaintView extends View implements View.OnTouchListener {
         thickness = t;
     }
 
+    int selection = 1;
+    public static void shapeSelection(int i){
+
+    }
+
 
     //up dates the lines array currently
     private void arrayUPDate(float downx, float downy, float upx, float upy) {
-        linepaint = new LinePaint(downx, downy, upx, upy,color,thickness);//May come in handy with LinePaint class
+        linepaint = new LinePaint(downx, downy, upx, upy,color,thickness,selection);//May come in handy with LinePaint class
         linePaint.add(linepaint); //May come in handy with LinePaint class
 
 
