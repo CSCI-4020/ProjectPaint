@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,11 +12,13 @@ import android.view.MenuItem;
 import android.view.View;
 
 public class PaintActivity extends Activity {
-
+    LinePaint linepaint = new LinePaint();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paint);
+        linepaint.setColor("Black");
+        linepaint.setThickness(10);
 
 //Buttons that lets the user select the color of the new line
         findViewById(R.id.color_button).setOnClickListener(new View.OnClickListener() {
@@ -26,7 +29,9 @@ public class PaintActivity extends Activity {
                 builder.setPositiveButton("Black", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        PaintView.setColor("Black");
+
+                        linepaint.setColor("Black");
+
 
 
 
@@ -37,7 +42,7 @@ public class PaintActivity extends Activity {
                 builder.setNegativeButton("Blue", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        PaintView.setColor("Blue");
+                        linepaint.setColor("Blue");
 
 
                     }
@@ -45,11 +50,52 @@ public class PaintActivity extends Activity {
                 builder.setNeutralButton("Red", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        PaintView.setColor("Red");
+                        linepaint.setColor("Red");
+
 
 
                     }
                 });
+
+
+
+                builder.show();
+
+            }
+        });
+
+        findViewById(R.id.thick_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(PaintActivity.this);
+                builder.setTitle("Thickness");
+                builder.setPositiveButton("10pt", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        linepaint.setThickness(10);
+
+
+                    }
+                });
+
+                builder.setNegativeButton("20pt", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        linepaint.setThickness(20);
+
+
+                    }
+                });
+                builder.setNeutralButton("30pt", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        linepaint.setThickness(30);
+
+
+                    }
+                });
+
+
 
 
 

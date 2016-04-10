@@ -17,11 +17,12 @@ import java.util.ArrayList;
 public class PaintView extends View implements View.OnTouchListener{
 
     private Paint backgroundPaint;
-    private static Paint linePaint;
 
-    private float downX,upX,downY,upY;//Stores the coordinates for user input
 
-    private ArrayList<Float> lines = new ArrayList<>();//Stores the coordinates of the lines
+
+
+
+    private ArrayList<LinePaint> linePaint = new ArrayList<>(); //May come in handy with LinePaint class
 
 
 // Constructors
@@ -48,20 +49,14 @@ public class PaintView extends View implements View.OnTouchListener{
         backgroundPaint.setColor(Color.WHITE);
         backgroundPaint.setStyle(Paint.Style.FILL);
 
-        linePaint = new Paint();
-        linePaint.setColor(Color.BLACK);
-        linePaint.setStyle(Paint.Style.STROKE);
-        linePaint.setStrokeWidth(10);
+
 
         this.setOnTouchListener(this);
 
     }
 
-    public static void setColor(String color){
 
-        linePaint.setColor(Color.parseColor(color));
 
-    }
 
 //draws on the paint view
     @Override
@@ -70,13 +65,14 @@ public class PaintView extends View implements View.OnTouchListener{
 
         canvas.drawPaint(backgroundPaint);
 
-       // canvas.drawLine(0, 0, getWidth() - 1, getHeight() - 1, linePaint);//draws a line accross the screen for testing purposes
-      for (int l=0; l< lines.size(); l+=4) {//supposed to output the coordinates of the lines arraylist
+      // canvas.drawLine(0, 0, getWidth() - 1, getHeight() - 1, linePaint);//draws a line accross the screen for testing purposes
 
-          canvas.drawLine(lines.get(l), lines.get(l + 1), lines.get(l + 2), lines.get(l + 3), linePaint);
-          Log.i("arrayDraw", "downx" + lines.get(l) + ", downy" + lines.get(l + 1) + ", upx" + lines.get(l + 2) + ", upy" + lines.get(+3));
+        for(LinePaint l: linePaint){
 
-      }
+            canvas.drawLine(l.getX1(), l.getY1(), l.getX2(), l.getY2(), l.paint);
+
+
+        }
 
 
     }
@@ -122,6 +118,8 @@ public class PaintView extends View implements View.OnTouchListener{
         setMeasuredDimension(width, height);
     }
 
+    private float downX,upX,downY,upY;//Stores the coordinates for user input
+
     @Override//on touch method cathe's user input
     public boolean onTouch(View v, MotionEvent event) {
 
@@ -147,18 +145,20 @@ public class PaintView extends View implements View.OnTouchListener{
                 break;
 
         }
-        Log.i("onTouch","End of onTouch");
+        Log.i("onTouch", "End of onTouch");
         return true;
 
     }
-//up dates the lanes array currently
+
+
+
+
+//up dates the lines array currently
     private void arrayUPDate(float downx, float downy,float upx,float upy){
+        LinePaint linepaint = new LinePaint(downx,downy,upx,upy);//May come in handy with LinePaint class
+        linePaint.add(linepaint); //May come in handy with LinePaint class
 
 
-        lines.add(downx);
-        lines.add(downy);
-        lines.add(upx);
-        lines.add(upy);
 
 
 
