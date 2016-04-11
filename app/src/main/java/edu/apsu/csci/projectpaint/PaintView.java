@@ -1,5 +1,6 @@
 package edu.apsu.csci.projectpaint;
 
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -8,7 +9,14 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 /**
@@ -21,10 +29,12 @@ public class PaintView extends View implements View.OnTouchListener {
     LinePaint linepaint;
 
 
-    private ArrayList<LinePaint> linePaint = new ArrayList<>(); //May come in handy with LinePaint class
+    ArrayList<LinePaint> linePaint = new ArrayList<>(); //May come in handy with LinePaint class
 
 
     // Constructors
+
+
     public PaintView(Context context) {
         super(context);
         setup(null);
@@ -43,12 +53,12 @@ public class PaintView extends View implements View.OnTouchListener {
 
     }
 
+
     //setup the paint view
     private void setup(AttributeSet attr) {
         backgroundPaint = new Paint();
         backgroundPaint.setColor(Color.WHITE);
         backgroundPaint.setStyle(Paint.Style.FILL);
-
 
 
         this.setOnTouchListener(this);
@@ -66,15 +76,14 @@ public class PaintView extends View implements View.OnTouchListener {
         // canvas.drawLine(0, 0, getWidth() - 1, getHeight() - 1, linePaint);//draws a line accross the screen for testing purposes
 
         for (LinePaint l : linePaint) {
-            if(l.getId()==1){
+            if (l.getId() == 1) {
                 canvas.drawLine(l.getX1(), l.getY1(), l.getX2(), l.getY2(), l.paint);
-            }else if(l.getId()==2){
-
-            }else if(l.getId()==3){
+            } else if (l.getId() == 2) {
+                canvas.drawOval(l.getX1(), l.getY1(), l.getX2(), l.getY2(), l.paint);
+            } else if (l.getId() == 3) {
+                canvas.drawRect(l.getX1(), l.getY1(), l.getX2(), l.getY2(), l.paint);
 
             }
-
-
 
 
         }
@@ -157,29 +166,75 @@ public class PaintView extends View implements View.OnTouchListener {
 
     static String color = "BLACK";
     static int thickness = 10;
+
     public static void setCurrentColor(String c) {
-      color=c;
+        color = c;
     }
 
     public static void setCurrentThickness(int t) {
         thickness = t;
     }
 
-    int selection = 1;
-    public static void shapeSelection(int i){
+    static int selection = 1;
+
+    public static void shapeSelection(int i) {
+        selection = i;
+
+    }
+
+
+    public void undoArray() {
+
+        linePaint.remove(linePaint.size() - 1);
+        invalidate();
 
     }
 
 
     //up dates the lines array currently
     private void arrayUPDate(float downx, float downy, float upx, float upy) {
-        linepaint = new LinePaint(downx, downy, upx, upy,color,thickness,selection);//May come in handy with LinePaint class
+        linepaint = new LinePaint(downx, downy, upx, upy, color, thickness, selection);//May come in handy with LinePaint class
         linePaint.add(linepaint); //May come in handy with LinePaint class
-
 
 
         Log.i("arrayUPDate()", "downx" + downx + ", downy" + downy + ", upx" + upx + ", upy" + upy);
         invalidate();
+    }
+
+    public void readData(String filename) {
+
+        FileInputStream fis;
+        try {
+            fis = getContext().openFileInput(filename);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            linePaint = (ArrayList<LinePaint>) ois.readObject();
+            Log.i("File Read", "File read");
+
+            ois.close();
+            invalidate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void save(String filename) {
+        try {
+            FileOutputStream fos = getContext().openFileOutput(filename + ".srl", Context.MODE_PRIVATE);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(linePaint);
+
+            Log.i("save", "Saved to a file");
+
+
+            oos.close();
+        } catch (FileNotFoundException e) {
+            Log.e("WRITE_ERR", "Cannot Save Data: " + e.getMessage());
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 

@@ -1,29 +1,30 @@
 package edu.apsu.csci.projectpaint;
 
-import android.app.Activity;
 import android.app.ListActivity;
+
 import android.content.Intent;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
-import java.util.ArrayList;
 
 public class MainActivity extends ListActivity {
 
-    private ArrayAdapter<String> adapter;
+
+    String[] SavedFiles;
+    public static final String FILENAME_KEY = "fileName";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
 
-        ArrayList<String> items = new ArrayList<>();
-
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
-
+        SavedFiles = getApplicationContext().fileList();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, SavedFiles);
         setListAdapter(adapter);
     }
 
@@ -51,5 +52,15 @@ public class MainActivity extends ListActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        String fileName = (String) l.getItemAtPosition(position);
+        Intent intent = new Intent(getApplicationContext(), PaintActivity.class);
+        intent.putExtra(FILENAME_KEY, fileName);
+        startActivity(intent);
+
+
     }
 }
