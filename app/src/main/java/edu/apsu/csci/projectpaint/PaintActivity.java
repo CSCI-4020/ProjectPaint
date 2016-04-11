@@ -80,7 +80,7 @@ public class PaintActivity extends Activity implements RadioGroup.OnCheckedChang
 
 
 
-
+//Comment
 //Buttons that lets the user select the color of the new line
         findViewById(R.id.color_button).setOnClickListener(new View.OnClickListener() {
             @Override
