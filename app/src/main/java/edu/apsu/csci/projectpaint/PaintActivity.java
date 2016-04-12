@@ -21,13 +21,11 @@ public class PaintActivity extends Activity implements RadioGroup.OnCheckedChang
         setContentView(R.layout.activity_paint);
 
         Intent intent = getIntent();
-        String fileName = intent.getStringExtra(MainActivity.FILENAME_KEY);
-
-
+        String fileName;
+        fileName = intent.getStringExtra(MainActivity.FILENAME_KEY);
         PaintView paintView = (PaintView) findViewById(R.id.imageButton);
 
-        paintView.readData(fileName);
-
+        //paintView.readData(fileName);
 
 
         RadioGroup radioGroup = (RadioGroup)findViewById(R.id.radioGroup);
